@@ -1,0 +1,26 @@
+{% extends "main/template.html" %}
+
+{% load static %}
+
+{% block title %}
+    {{ labelements.lab_name }} Sharing
+{% endblock %}
+
+{% block body %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {% for shared in sharelist %}
+                <p>Shared with {{shared.instructor}} <input class="submit" type="submit" name="{{shared.instructor}}" value="DELETE"></p>
+            {% endfor %}
+            
+        </form>
+        
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        {{sharingform}}
+        <input class="submit" type="submit" name="New-Share-Submit">
+    </form>
+    
+{% endblock %}

@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block title %}
+            {% endblock %}
+        </title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+        <link rel="stylesheet" type="text/css" href="{% static 'css/template.css' %} ? {% now 'U' %}" />
+    </head>
+    <body>
+        <div id="sidebar" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn sidecontent" onclick="closeNav() ">&times;</a>
+            <a class="sidecontent" href="{% url 'mainsite:home' %}">Home</a>
+            <a class="sidecontent" href="{% url 'mainsite:profile' %}">Profile</a>
+            <a class="sidecontent" href="#">Settings</button>
+            <a class="sidecontent" href="{% url 'mainsite:userexit' %}">Logout</a>
+        </div>
+
+        <div id="menubar-container">
+            <a href="{% url 'mainsite:home' %}">
+                <img src="{% static 'images/TIPLogo.png' %}" id="tiplogo" class="menubar" />
+            </a>
+
+            <div id="menuright" class="menu">
+                <div class="nav-links" id="navLinks">
+                <a class="menubar" href="{% url 'mainsite:home' %}">Home</a>
+                <a class="menubar" href="{% url 'mainsite:newlab' %}">Create</a>
+                <a class="menubar" href="{% url 'mainsite:aboutus' %}">About Us</a>
+                <a class="menubar" href="{% url 'mainsite:contact' %}">Contact</a>
+                <img src="{% static 'images/account.png' %}" id="account" class="menubar" onclick="openNav()"/>
+                </div>
+            </div>
+                
+
+        </div>
+        
+        <div id="main">
+            {% block body %}
+            {% endblock %}
+        </div>
+
+        
+    </body>
+    <script>
+        function openNav(){
+            document.getElementById("sidebar").style.width = "250px";
+        }
+        function closeNav(){
+            document.getElementById("sidebar").style.width = "0";
+        }
+
+        document.querySelector('#main').addEventListener('click', closeNav)
+
+        
+    </script>
+
+
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu(){
+            navLinks.style.right = "0";
+        }
+        function hideMenu(){
+            navLinks.style.right = "-200px";
+        }
+    </script>
+
+
+
+</html>
