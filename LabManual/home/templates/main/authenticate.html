@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <title>
+            Lab Manual Maker - Login
+        </title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/authenticate.css' %} ? {% now 'U' %}" />
+            <div class="bg"></div>
+            <div class="bg bg2"></div>
+            <div class="bg bg3"></div>
+    </head>
+    <body>
+        <header>
+            <img src="{% static 'images/logo.png' %}" id="tiplogo" />
+        </header>
+
+        <div class="cont">
+            <div class="form sign-in" id="login">
+                <form method="POST">
+                    <h2>Login</h2>
+                    {% csrf_token %}
+                    <label>
+                    <span for="email">Email</span>
+                    <input required id="loginemail" type="email" name="email" />
+                    </label>
+                    <label >
+                    <span for="password">Password</span>
+                    <input required id="loginpassword"  type="password" name="password"/>
+                    </label>
+
+                    <button class="submit" type="submit" value="Login" id="Login" name="login-submit">Login</button>
+                </form>
+
+                {% for message in messages %}
+                <p class="notif">{{message}}{{reg_form.errors}}</p>
+                {% endfor %}
+            </div>
+
+            <div class="sub-cont">
+                <div class="img">
+                  <div class="img-text m-up">
+                    <h2>New here?</h2>
+                    <p>Register and discover great amount of new opportunities!</p>
+                  </div>
+                  <div class="img-text m-in">
+                    <h2>One of us?</h2>
+                    <p>If you already has an account, just Login.</p>
+                  </div>
+                  <div class="img-btn">
+                    <span class="m-up">Register</span>
+                    <span class="m-in">Login</span>
+                  </div>
+                </div>
+
+                <div class="form sign-up" id="register">
+                    <form method="POST">
+                        <h2>Register</h2>
+                        {% csrf_token %}
+                        
+                        {% for field in reg_form %}
+                        <label>
+                            <p>{{field.label}}</p>
+                            <p>{{field}}</p>
+                        
+                        {% endfor %}
+                        </label>
+                    
+                        
+                        <button class="submit" type="submit" value="Register" id="Register" name="register-submit">Register</button>
+                    </form>
+                    {% for message in messages %}
+                    <p class="notif">{{message}}{{reg_form.errors}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            document.querySelector('.img-btn').addEventListener('click', function()
+                {
+                    document.querySelector('.cont').classList.toggle('s-signup')
+                }
+            )
+        </script>
+    </body>
+
+    
+</html>

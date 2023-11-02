@@ -1,0 +1,49 @@
+{% extends "main/template.html" %}
+
+{% load static %}
+
+{% block title %}
+    Laboratory Manual Maker
+{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %} ? {% now 'U' %}" />
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+
+    <div class="header">
+        <div class="content">
+            <h1>Laboratory Manual Maker</h1>
+            <h1>Laboratory Manual Maker</h1>
+        </div>
+
+        <div class="search">
+            <form class="search-bar" method="POST" >
+                {% csrf_token %}
+                <input name="searched"  placeholder="Course / Topic / Instructor" />
+                <button type="submit"><img src="{% static 'images/search.png' %}"></button>
+            </form>
+        </div>
+    
+
+        <div class="viewfile">
+            <ul>
+                {% for labmanual in labmanuals %}
+                    <p>
+                        {{labmanual}}
+                        <button class="cta" name="view" onclick="location.href ='{% url 'mainsite:viewlab' labmanual.id %}'">
+                            <span> View File</span>
+                            <svg viewBox="0 0 13 10" height="10px" width="15px">
+                                <path d="M1,5 L11,5"></path>
+                                <polyline points="8 1 12 5 8 9"></polyline>
+                              </svg>
+                        </button>
+                    </p>
+                    {% empty %}
+                        <li>No Lab Manual Found</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
